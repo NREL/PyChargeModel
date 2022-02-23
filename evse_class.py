@@ -1,7 +1,8 @@
 class EVSE_class():
-    def __init__(self, efficiency, Prated_kW):
+    def __init__(self, efficiency, Prated_kW, evse_id):
         self.efficiency = efficiency
         self.Prated_kW  = Prated_kW
+        self.evse_id   = evse_id
         
         self.ev.voltage = 0.0
         self.ev.power   = 0.0
