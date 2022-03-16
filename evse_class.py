@@ -12,16 +12,22 @@ class EVSE_class():
         self.server_setpoint = 0.0
 
        
-    def receive_from_ev(self, Vbatt, Pbatt_kW, soc, plugged):
+    def receive_from_ev(self, Vbatt, Pbatt_kW, soc, plugged, ready):
+        ### receive Vbatt, Pbatt, SOC, plugged via TCP or something if there needs a connection
         self.ev_voltage = Vbatt
         self.ev_power   = Pbatt_kW
         self.ev_soc     = soc
         self.ev_plugged = plugged
+        self.ev_ready      = ready
 
 
     def send_to_ev(self):
-        Pmax = min(self.server_setpoint, self.Prated_kW)*self.efficiency
-        
+        if self.ev_ready:
+            Pmax = min(self.server_setpoint, self.Prated_kW)*self.efficiency
+        else:
+            Pmax = 0.0
+
+        ### send Pmax via TCP or something if there needs a connection
         return Pmax
 
 
