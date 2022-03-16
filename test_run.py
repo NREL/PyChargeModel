@@ -28,8 +28,7 @@ for t in np.arange(t0, tf, dt):
     evse_instance.receive_from_ev(ev1.packvoltage, ev1.packpower, 
                                   ev1.soc, ev1.pluggedin, ev1.readytocharge)
 
-    ### evse id,                                       
-        
+         
     ### EVSE -> EV
     Pmax = evse_instance.send_to_ev()
 
