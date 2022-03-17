@@ -14,10 +14,13 @@ import math
 class ElectricVehicles:
     def __init__(self, **kwargs):
         # load EV parameters
+        kwargs =  {k.lower(): v for k, v in kwargs.items()}
         self.evtype = kwargs['vehicle_type']
         self.arrivaltime = kwargs['arrival_time']
         self.initialsoc = kwargs['initial_soc']
         self.modelparameters = self.load_ev_file(**kwargs)
+        if 'batterycapacity_kwh' in kwargs:
+            self.modelparameters['ev_packcapacity'] = kwargs['batterycapacity_kwh']
         self.soc = self.initialsoc
         self.timestamp_soc = self.arrivaltime
         self.packvoltage = self.getocv(self.soc, **kwargs)[0]
@@ -26,12 +29,12 @@ class ElectricVehicles:
         self.pluggedin = False
         self.readytocharge = False
         self.chargecomplete = False
-        if 'targetsoc' in kwargs:
-            self.targetsoc = kwargs['targetsoc']
+        if 'target_soc' in kwargs:
+            self.targetsoc = kwargs['target_soc']
         else:
             self.targetsoc = 1.0 # if target SOC is not provided, set it as 1.0
-        if 'departuretime' in kwargs:
-            self.departuretime = kwargs['departuretime']
+        if 'departure_time' in kwargs:
+            self.departuretime = kwargs['departure_time']
         else:
             self.departuretime = self.arrivaltime + 24.0*3600 # if departure time is not provided, set it as 24 hours later than arrival time
         self.evse_id = np.nan
@@ -139,7 +142,7 @@ class ElectricVehicles:
             CVvolt = Ns*interpolate.pchip_interpolate(socpts,ocvpts,0.95)
             CCcurr = Np*self.modelparameters['ev_crate']*self.modelparameters['ev_cellcapacity']
             # assuming that EVSE will communicate a power with kW in the keyword 
-            power = [keyval for key, keyval in kwargs.items() if 'kW' in key]
+            power = [keyval for key, keyval in kwargs.items() if 'kw' in key.lower()]
             if not power:
                 current = CCcurr
             else:
