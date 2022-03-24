@@ -8,6 +8,7 @@ class EVSE_class():
         self.ev_power   = 0.0
         self.ev_soc     = 0.0
         self.ev_plugged = False
+        self.state      = 'A'
 
         self.server_setpoint = 0.0
 
@@ -18,7 +19,14 @@ class EVSE_class():
         self.ev_power   = Pbatt_kW
         self.ev_soc     = soc
         self.ev_plugged = plugged
-        self.ev_ready      = ready
+        self.ev_ready   = ready
+
+        if self.ev_plugged and self.ev_power < 0.1:
+            self.state = 'B'
+        if self.ev_plugged and self.ev_power >= 0.1:
+            self.state = 'C'
+        if not self.ev_plugged:
+            self.state = 'A'
 
 
     def send_to_ev(self):
