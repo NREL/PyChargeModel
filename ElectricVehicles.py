@@ -79,7 +79,7 @@ class ElectricVehicles:
                       'ev_cellcapacity': 26.0, #Ah
                       'ev_packcapacity': 100.0, #kWh
                       'ev_nominalvoltage': 350.0, #V
-                      'ev_setuptime': 120.0, #s
+                      'ev_setuptime': 30.0, #s
                       'ev_batterychemistry': 'nmc',
                       'ev_chargingprotocol':'cc-cv',
                       }
