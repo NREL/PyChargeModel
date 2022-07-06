@@ -15,6 +15,18 @@ Initialize:
 `evse_instance = EVSE_class(efficiency=0.99, Prated_kW=6.6, evse_id=1)`
 
 An EV agent or object can be instantiated by providing the following name-value pairs:
-1. `arrival_time` : relative time in seconds [reqd.]
+1. `arrival_time` : relative time of arrival of the vehicle in seconds [reqd.]
 2. `initial_soc` : state of charge (SOC) of the EV at the time of arrival as a fraction between 0.0 and 1.0 [reqd.]
-3. `batterycapacity_kWh` : capacity of the EV battery pack in killowatt-hours [reqd.]
+3. `batterycapacity_kWh` : capacity of the EV battery pack in killowatt-hours, default = 100 kWh [opt. but highly suggested]
+4. `vehicle_type` : vehicle type to define the class of the vehicle, default = 'bev' [opt.]
+5. `departure_time` : relative time of departure of the vehicle in seconds, default = arrival_time + 24 hours [opt.]
+6. `target_soc` : target SOC for the vehicle to be charged up to, default = 1.0 [opt.]
+
+There are other default parameters that can be further modified by providing a CSV file name and its input path where such parameter values can be listed. An example of such a file is included in this repo.
+
+Similarly, an EVSE agent or object can be instantiated by providing the following name-value pairs:
+1. `evse_id` : A numerical EVSE ID [reqd.]
+2. `efficiency` : Efficiency of the EVSE as a fraction between 0 and 1 [reqd.]
+3. `Prated_kW` : Rated power capacity of the EVSE in kW [reqd.]
+
+
