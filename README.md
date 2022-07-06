@@ -28,5 +28,32 @@ Similarly, an EVSE agent or object can be instantiated by providing the followin
 1. `evse_id` : A numerical EVSE ID [reqd.]
 2. `efficiency` : Efficiency of the EVSE as a fraction between 0 and 1 [reqd.]
 3. `Prated_kW` : Rated power capacity of the EVSE in kW [reqd.]
+The EVSE model is also compatible for smart charge management application. The power dispensed by the EVSE can be controlled by setting:
+`evse_instance.server_setpoint = 5.0`
 
+## Step 2: Assign the EV to an EVSE
+An EVSE object is assigned to an EV object using the `assign_evse` method and passing on the EVSE ID:
+
+`ev1.assign_evse(evse_instance.evse_id)`
+
+## Step 3: Charge the EV
+EV charging behavior is emulated by calling the `chargevehicle` method for each of the EV objects. The `chargevehicle` method is called at each time step during the simulation time. Thus this method updates the state of the EV over a single time step. In order to get a temporal profile of the vehicle charging power, SOC etc., this method needs to be called throughout the simulation time. In the `test_run.py` script, the EV is charged over the simulation period by running a for-loop:
+
+`t0 = 0 #start of simulation time [s]`
+
+`tf = 1.1*60*60 # end of simulation time [s]`
+
+`dt = 1 # time step [s]`
+
+`Pmax = 0.0 # maximum power to charge with [kW]`
+
+`### Start simulation`
+
+`for t in np.arange(t0, tf, dt):`
+    `ev1.chargevehicle(t, dt=dt, evsePower_kW=Pmax)`
+
+The `chargevehicle` method takes the following inputs:
+1. t : simulation time in seconds as a numerical value
+2. dt = x.x : timestep of simulation in seconds
+3. evsePower_kW = x.xx : power to charge the vehicle with in kW [opt.]
 
