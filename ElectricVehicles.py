@@ -15,7 +15,11 @@ class ElectricVehicles:
     def __init__(self, **kwargs):
         # load EV parameters
         kwargs =  {k.lower(): v for k, v in kwargs.items()}
-        self.evtype = kwargs['vehicle_type']
+        if 'vehicle_type' in kwargs:
+            self.evtype = kwargs['vehicle_type']
+        else:
+            self.evtype = 'bev'
+
         self.arrivaltime = kwargs['arrival_time']
         self.initialsoc = kwargs['initial_soc']
         self.modelparameters = self.load_ev_file(**kwargs)
