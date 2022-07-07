@@ -14,7 +14,7 @@ Initialize:
 
 `evse_instance = EVSE_class(efficiency=0.99, Prated_kW=6.6, evse_id=1)`
 
-An EV agent or object can be instantiated by providing the following name-value pairs:
+An EV agent or object can be instantiated by providing the following key-value pairs:
 1. `arrival_time` : relative time of arrival of the vehicle in seconds [reqd.]
 2. `initial_soc` : state of charge (SOC) of the EV at the time of arrival as a fraction between 0.0 and 1.0 [reqd.]
 3. `batterycapacity_kWh` : capacity of the EV battery pack in killowatt-hours, default = 100 kWh [opt. but highly suggested]
@@ -24,7 +24,7 @@ An EV agent or object can be instantiated by providing the following name-value 
 
 There are other default parameters that can be further modified by providing a CSV file name and its input path where such parameter values can be listed. An example of such a file is included in this repo.
 
-Similarly, an EVSE agent or object can be instantiated by providing the following name-value pairs:
+Similarly, an EVSE agent or object can be instantiated by providing the following key-value pairs:
 1. `evse_id` : A numerical EVSE ID [reqd.]
 2. `efficiency` : Efficiency of the EVSE as a fraction between 0 and 1 [reqd.]
 3. `Prated_kW` : Rated power capacity of the EVSE in kW [reqd.]
@@ -57,3 +57,16 @@ The `chargevehicle` method takes the following inputs:
 2. dt = x.x : timestep of simulation in seconds
 3. evsePower_kW = x.xx : power to charge the vehicle with in kW [opt.]
 
+Power setpoint by the EVSE (here `evsePower_kW`) is optional - without this input, the charging power requested by the EV is based on its power rating (i.e. rated C-rate). The model is also capable of handling charging and discharging behavior and this can be achieved by providing a positive or negative power setpoint while calling the `chargevehicle` method. 
+
+## Step 4: Logging data
+
+Throughout the simulation, various states of the EV object gets updated and these states can be accessed using the `getvehiclestate` method. Calling this method using `ev1.getvehiclestate()` returns a dictionary with the following keys:
+
+1. `soc` : current state of charge of the EV [0-1]
+2. `packpower` : power consumption at the battery pack terminals [W]
+3. `packvoltage` : terminal voltage of the battery pack [V]
+4. `packcurrent` : current drawn at the battery pack terminals [A]
+5. `pluginsignal` : boolean indicating EV is plugged-in
+6. `chargecompletesignal` : boolean indicating whether a charging session is completed or not
+7. `timestamp_soc` : relative timestamps associated with the SOC of the battery pack [s]
