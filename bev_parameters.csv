@@ -1,0 +1,19 @@
+﻿Parameter Name,Parameter Value,Comment
+ev_crate,1.0,C-rate that the battery pack can accept [1/hr]
+ev_cellcapacity,26.0,capacity of the individual cells that are in the battery pack [A-hr]
+ev_packcapacity,100.0,capacity of the battery pack [kWh]
+ev_nominalvoltage,350.0,nominal voltage of the battery pack at 50% state of charge [V]
+ev_setuptime,30.0,time to plug in the vehicle and perform handshake with the EVSE once it arrives at the port [s]
+ev_batterychemistry,nmc,lithium-ion chemistry of the battery pack
+ev_chargingprotocol,cc-cv,"constant current constant voltage protocol to be applied for charging, other protocols can be modeled too"
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
+,,
