@@ -1,5 +1,5 @@
-# EVSE Model
-The evse_model repository includes two Python classes: (i) ElectricVehicles.py that models the charging and discharging behavior of an electric vehicle (EV), (ii) EVSE_class.py that emulates an electric vehicle supply equipment (EVSE) or the charging port. These classes can be instantiated with required parameter values to generate multiple "electric vehicle" agents and "EVSE" agents that can interact with each other through built-in methods. The "test_run.py" script in this repository provide a simple example demonstrating the use of these two classes to emulate the charging of an EV at a charging port. This readme file explains the steps in "test_run.py" while providing details about these classes during the process.
+# PyChargeModel
+The PyChargeModel repository includes two Python classes: (i) ElectricVehicles.py that models the charging and discharging behavior of an electric vehicle (EV), (ii) EVSE_class.py that emulates an electric vehicle supply equipment (EVSE) or the charging port. These classes can be instantiated with required parameter values to generate multiple "electric vehicle" agents and "EVSE" agents that can interact with each other through built-in methods. The "test_run.py" script in this repository provide a simple example demonstrating the use of these two classes to emulate the charging of an EV at a charging port. This readme file explains the steps in "test_run.py" while providing details about these classes during the process.
 
 ## Step 1: Loading and initializing the classes
 Load:
